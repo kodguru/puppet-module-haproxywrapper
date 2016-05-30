@@ -12,7 +12,7 @@
 #
 class haproxywrapper (
   $custom_fragment  = undef,
-  $default_options  = undef,
+  $defaults_options  = undef,
   $global_options   = undef,
   $merge_options    = undef,
   $package_ensure   = undef,
@@ -35,7 +35,7 @@ class haproxywrapper (
   $instance         = undef,
   $instance_service = undef,
   $mapfile          = undef
-) { include ::haproxy
+) { include ::haproxy::params
 
   if $custom_fragment != undef {
     validate_string($custom_fragment)
@@ -74,16 +74,16 @@ class haproxywrapper (
   }
   class { 'haproxy':
     custom_fragment => $custom_fragment,
-    default_options => pick($default_options, $haproxy::params::defaults_options),
-    global_options  => pick($global_options, $haproxy::params::global_options),
-    merge_options   => pick($merge_options, $haproxy::params::merge_options),
-    package_ensure  => pick($package_ensure, $haproxy::package_ensure),
-    package_name    => pick($package_name, $haproxy::params::package_name),
+    default_options => pick($default_options, $::haproxy::params::defaults_options),
+    global_options  => pick($global_options, $::haproxy::params::global_options),
+    merge_options   => pick($merge_options, $::haproxy::params::merge_options),
+    package_ensure  => pick($package_ensure, 'present'),
+    package_name    => pick($package_name, $::haproxy::params::package_name),
     restart_command => $restart_command,
-    service_ensure  => pick($service_ensure, $haproxy::service_ensure),
-    service_manage  => pick($service_manage, $haproxy::service_manage),
-    config_dir      => pick($config_dir, $haproxy::params::config_dir),
-    config_file     => pick($config_file, $haproxy::params::config_file),
+    service_ensure  => pick($service_ensure, 'running'),
+    service_manage  => pick($service_manage, true),
+    config_dir      => pick($config_dir, $::haproxy::params::config_dir),
+    config_file     => pick($config_file, $::haproxy::params::config_file),
   }
 
   if $listen != undef {
