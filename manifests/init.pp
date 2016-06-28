@@ -26,7 +26,7 @@ class haproxywrapper (
   $listen           = undef,
   $frontend         = undef,
   $backend          = undef,
-  $balancemember    = undef,
+  $balancermember   = undef,
   $userlist         = undef,
   $peers            = undef,
   $peer             = undef,
@@ -95,8 +95,8 @@ class haproxywrapper (
   if $backend != undef {
     create_resources('::haproxy::backend', $backend)
   }
-  if $balancemember != undef {
-    create_resources('::haproxy::balancemember', $balancemember)
+  if $balancermember != undef {
+    create_resources('::haproxy::balancermember', $balancermember)
   }
   if $userlist != undef {
     create_resources('::haproxy::userlist', $userlist)
