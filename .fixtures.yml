@@ -1,5 +1,12 @@
 fixtures:
   repositories:
-    stdlib: "https://github.com/puppetlabs/puppetlabs-stdlib.git"
+    concat:
+      repo: "git://github.com/puppetlabs/puppetlabs-concat.git"
+    haproxy:
+      repo: 'git://github.com/puppetlabs/puppetlabs-haproxy.git'
+      ref: '1.5.0'
+    stdlib:
+      repo: 'git://github.com/puppetlabs/puppetlabs-stdlib.git'
+      ref: '4.11.0'
   symlinks:
     haproxywrapper: "#{source_dir}"
