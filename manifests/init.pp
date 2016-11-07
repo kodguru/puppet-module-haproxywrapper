@@ -11,30 +11,31 @@
 #   e.g. "Specify one or more upstream ntp servers as an array."
 #
 class haproxywrapper (
-  $custom_fragment  = undef,
-  $default_options  = undef,
-  $global_options   = undef,
-  $merge_options    = undef,
-  $package_ensure   = undef,
-  $package_name     = undef,
-  $restart_command  = undef,
-  $service_ensure   = undef,
-  $service_manage   = undef,
-  $service_options  = undef,
-  $config_dir       = undef,
-  $config_file      = undef,
-  $listen           = undef,
-  $frontend         = undef,
-  $backend          = undef,
-  $balancermember   = undef,
-  $userlist         = undef,
-  $peers            = undef,
-  $peer             = undef,
-  $mailers          = undef,
-  $mailer           = undef,
-  $instance         = undef,
-  $instance_service = undef,
-  $mapfile          = undef
+  $custom_fragment       = undef,
+  $default_options       = undef,
+  $global_options        = undef,
+  $merge_options         = undef,
+  $package_ensure        = undef,
+  $package_name          = undef,
+  $restart_command       = undef,
+  $service_ensure        = undef,
+  $service_manage        = undef,
+  $service_options       = undef,
+  $config_dir            = undef,
+  $config_file           = undef,
+  $listen                = undef,
+  $frontend              = undef,
+  $backend               = undef,
+  $balancermember        = undef,
+  $balancermember_active = undef,
+  $userlist              = undef,
+  $peers                 = undef,
+  $peer                  = undef,
+  $mailers               = undef,
+  $mailer                = undef,
+  $instance              = undef,
+  $instance_service      = undef,
+  $mapfile               = undef
 ) { include ::haproxy::params
 
   if $custom_fragment != undef {
@@ -95,9 +96,23 @@ class haproxywrapper (
   if $backend != undef {
     create_resources('haproxy::backend', $backend)
   }
-  if $balancermember != undef {
-    create_resources('haproxy::balancermember', $balancermember)
+
+  if $balancermember_active != undef {
+    validate_array($balancermember_active)
   }
+
+  if $balancermember != undef {
+    validate_hash($balancermember)
+    if $balancermember_active == undef {
+      $balancermember_real = $balancermember
+    }
+    else {
+      $balancermember_inactive = any2array(delete($balancermember, $balancermember_active))
+      $balancermember_real = delete($balancermember, $balancermember_inactive)
+    }
+    create_resources('haproxy::balancermember', $balancermember_real)
+  }
+
   if $userlist != undef {
     create_resources('haproxy::userlist', $userlist)
   }

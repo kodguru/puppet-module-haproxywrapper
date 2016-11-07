@@ -3,8 +3,9 @@
 1. [Overview](#overview)
 2. [Module Description - What the module does and why it is useful](#module-description)
 3. [Usage - Configuration options and additional functionality](#usage)
-4. [Limitations - OS compatibility, etc.](#limitations)
-5. [Development - Guide for contributing to the module](#development)
+4. [Parameters - Description of functional parameters](#parameters)
+5. [Limitations - OS compatibility, etc.](#limitations)
+6. [Development - Guide for contributing to the module](#development)
 
 ## Overview
 
@@ -83,6 +84,24 @@ haproxywrapper::listen:
         - 'puppetdb01 1.2.3.4:8081 check'
         - 'puppetdb02 1.2.3.4:8081 check port 8082'
 ```
+
+## Parameters
+
+---
+#### balancermember_active (array)
+Provide a list of active balancemembers to be added to the catalog. Takes the same key names provided via $balancermember.
+If specified, it acts like a filter that removes all $balancermember not listed here.
+
+Using this parameter you can deactivate balance members without needing to manipulate $balancemember.
+This enables you to use a global list for $balancemember and decide specificly which members are available.
+Also you can use $balancermember_active to easily disable members temporarily only.
+
+If not specified (the default), $balancemember will not be modified.
+
+- *Default*: undef
+
+---
+
 
 ## Limitations
 

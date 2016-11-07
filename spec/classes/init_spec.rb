@@ -39,8 +39,7 @@ describe 'haproxywrapper' do
   end
 
   describe 'with balancermember set to valid hash (containing two keys)' do
-    let(:params) do
-      mandatory_params.merge({
+    balancermembers = mandatory_params.merge({
         :balancermember => {
           'puppet1' => {
             'listening_service' => 'puppetmasters',
@@ -57,9 +56,10 @@ describe 'haproxywrapper' do
             'options'           => 'check port 8990'
           },
         }
-      })
-    end
+    })
 
+    let(:params) { balancermembers }
+    it { should have_haproxy__balancermember_resource_count(2) }
     it do
       should contain_haproxy__balancermember('puppet1').with({
         'listening_service' => 'puppetmasters',
@@ -78,7 +78,12 @@ describe 'haproxywrapper' do
         'options'           => 'check port 8990'
       })
     end
-    it { should have_haproxy__balancermember_resource_count(2) }
+
+    context 'when balancermember is set to valid %w(puppet1)' do
+      let(:params) { balancermembers.merge({ :balancermember_active => %w(puppet1) }) }
+      it { should contain_haproxy__balancermember('puppet1') }
+      it { should have_haproxy__balancermember_resource_count(1) }
+    end
   end
 
   describe 'variable type and content validations' do
@@ -90,7 +95,7 @@ describe 'haproxywrapper' do
         :message => 'is not an absolute path',
       },
       'array' => {
-        :name    => %w(),
+        :name    => %w(balancermember_active),
         :valid   => [%w(array)],
         :invalid => ['string', { 'ha' => 'sh' }, 3, 2.42, true, false],
         :message => 'is not an Array',
