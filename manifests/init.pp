@@ -12,7 +12,7 @@
 #
 class haproxywrapper (
   $custom_fragment       = undef,
-  $default_options       = undef,
+  $defaults_options       = undef,
   $global_options        = undef,
   $merge_options         = undef,
   $package_ensure        = undef,
@@ -41,8 +41,8 @@ class haproxywrapper (
   if $custom_fragment != undef {
     validate_string($custom_fragment)
   }
-  if $default_options != undef {
-    validate_hash($default_options)
+  if $defaults_options != undef {
+    validate_hash($defaults_options)
   }
   if $global_options != undef {
     validate_hash($global_options)
@@ -75,7 +75,7 @@ class haproxywrapper (
   }
   class { '::haproxy':
     custom_fragment  => $custom_fragment,
-    defaults_options => pick($default_options, $::haproxy::params::defaults_options),
+    defaults_options => pick($defaults_options, $::haproxy::params::defaults_options),
     global_options   => pick($global_options, $::haproxy::params::global_options),
     merge_options    => pick($merge_options, $::haproxy::params::merge_options),
     package_ensure   => pick($package_ensure, 'present'),
