@@ -83,6 +83,18 @@ haproxywrapper::listen:
       server:
         - 'puppetdb01 1.2.3.4:8081 check'
         - 'puppetdb02 1.2.3.4:8081 check port 8082'
+
+haproxywrapper::resolver:
+  'resolve-aws':
+    nameservers:
+      dns1: '127.0.0.1:53'
+    resolve_retries:        '30s'
+    timeout:
+      retry:                '1s'
+    hold:
+      nx:                   10
+      valid:                30        
+
 ```
 
 ## Parameters
