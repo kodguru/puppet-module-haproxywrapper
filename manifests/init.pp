@@ -18,6 +18,7 @@ class haproxywrapper (
   $package_ensure        = undef,
   $package_name          = undef,
   $restart_command       = undef,
+  $resolver              = undef,  
   $service_ensure        = undef,
   $service_manage        = undef,
   $service_options       = undef,
@@ -58,6 +59,9 @@ class haproxywrapper (
   }
   if $restart_command != undef {
     validate_string($restart_command)
+  }
+  if $resolver != undef {
+    create_resources('haproxy::resolver', $resolver)
   }
   if $service_ensure != undef {
     validate_re($service_ensure, '^(running|stopped)$', 'haproxywrapper::service_ensure must be running or stopped')
