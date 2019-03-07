@@ -93,7 +93,7 @@ haproxywrapper::resolver:
       retry:                '1s'
     hold:
       nx:                   10
-      valid:                30        
+      valid:                30
 
 ```
 
