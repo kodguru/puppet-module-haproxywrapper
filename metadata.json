@@ -1,6 +1,6 @@
 {
   "name": "gillarkod-haproxywrapper",
-  "version": "0.1.0",
+  "version": "v1.1.0",
   "author": "Takeshi Larsson",
   "summary": "Allows usage of puppetlabs-haproxy in hiera",
   "license": "Apache-2.0",
