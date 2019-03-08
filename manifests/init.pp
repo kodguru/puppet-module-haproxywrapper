@@ -18,6 +18,7 @@ class haproxywrapper (
   $package_ensure        = undef,
   $package_name          = undef,
   $restart_command       = undef,
+  $resolver              = undef,
   $service_ensure        = undef,
   $service_manage        = undef,
   $service_options       = undef,
@@ -95,6 +96,10 @@ class haproxywrapper (
   }
   if $backend != undef {
     create_resources('haproxy::backend', $backend)
+  }
+  if $resolver != undef {
+    validate_hash($resolver)
+    create_resources('haproxy::resolver', $resolver)
   }
 
   if $balancermember_active != undef {

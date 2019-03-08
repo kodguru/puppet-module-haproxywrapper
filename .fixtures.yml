@@ -2,6 +2,7 @@ fixtures:
   repositories:
     concat:
       repo: "git://github.com/puppetlabs/puppetlabs-concat.git"
+      ref: '2.2.1'
     haproxy:
       repo: 'git://github.com/puppetlabs/puppetlabs-haproxy.git'
       ref: '1.5.0'

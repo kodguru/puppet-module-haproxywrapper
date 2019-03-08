@@ -36,6 +36,8 @@ describe 'haproxywrapper' do
     it { should have_haproxy__instance_resource_count(1) } # one from haproxy, but none from haproxywrapper
     it { should have_haproxy__instance_service_resource_count(0) }
     it { should have_haproxy__mapfile_resource_count(0) }
+    it { should have_haproxy__resolver_resource_count(0) }
+    it { should have_haproxy__defaults_resource_count(0) }
   end
 
   describe 'with balancermember set to valid hash (containing two keys)' do
@@ -107,7 +109,7 @@ describe 'haproxywrapper' do
         :message => '(is not a boolean|Unknown type of boolean given)',
       },
       'hash' => {
-        :name    => %w(default_options global_options),
+        :name    => %w(defaults_options global_options resolver),
         :valid   => [], # valid hashes are to complex to block test them here.
         :invalid => ['string', 3, 2.42, %w(array), true, false, nil],
         :message => 'is not a Hash',
