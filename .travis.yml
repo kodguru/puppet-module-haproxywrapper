@@ -39,6 +39,10 @@ matrix:
     env: RUBYGEMS_VERSION=2.0.17 BUNDLER_VERSION=1.17.3 PUPPET_GEM_VERSION="~> 3" FUTURE_PARSER="yes"
   - rvm: 2.1.9
     env: RUBYGEMS_VERSION=2.7.8 BUNDLER_VERSION=1.17.3 PUPPET_GEM_VERSION="~> 4"
+  - rvm: 2.4.1
+    env: PUPPET_GEM_VERSION="~> 5"
+  - rvm: 2.5.1
+    env: PUPPET_GEM_VERSION="~> 6"
 
 notifications:
   email: false
