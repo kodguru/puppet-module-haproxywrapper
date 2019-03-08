@@ -1,12 +1,12 @@
 {
-  "name": "propyless-haproxywrapper",
+  "name": "gillarkod-haproxywrapper",
   "version": "0.1.0",
   "author": "Takeshi Larsson",
   "summary": "Allows usage of puppetlabs-haproxy in hiera",
   "license": "Apache-2.0",
-  "source": "https://github.com/propyless/puppet-module-haproxywrapper",
-  "project_page": "https://github.com/propyless/puppet-module-haproxywrapper",
-  "issues_url": "https://github.com/propyless/puppet-module-haproxywrapper/issues",
+  "source": "https://github.com/gillarkod/puppet-module-haproxywrapper",
+  "project_page": "https://github.com/gillarkod/puppet-module-haproxywrapper",
+  "issues_url": "https://github.com/gillarkod/puppet-module-haproxywrapper/issues",
   "dependencies": [
     {
       "name": "puppetlabs-stdlib",
